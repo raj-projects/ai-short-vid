@@ -1,19 +1,16 @@
-// middleware.ts
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
 
 export default clerkMiddleware((auth, req) => {
-  if (isProtectedRoute(req)) {
-    return auth().protect(); // ✅ call auth() and then .protect()
+  const { userId } = auth();
+  if (isProtectedRoute(req) && !userId) {
+    return NextResponse.redirect(new URL("/sign-in", req.url));
   }
-  return;
+  return NextResponse.next();
 });
 
 export const config = {
-  matcher: [
-    // Required to handle App Router routes & protect API calls
-    "/((?!_next|.*\\..*|favicon.ico).*)",
-    "/(api|trpc)(.*)",
-  ],
+  matcher: ["/dashboard/:path*"], // ✅ Protect only dashboard routes
 };
