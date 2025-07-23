@@ -10,9 +10,14 @@ function SideNav() {
 
   const MenuOptions = [
     { id: 1, name: "Dashboard", path: "/dashboard", icon: PanelsTopLeft },
-    { id: 2, name: "Create new", path: "/create-new", icon: FileVideo },
-    { id: 3, name: "Upgrade", path: "/upgrade", icon: ShieldPlus },
-    { id: 4, name: "Account", path: "/account", icon: CircleUser },
+    {
+      id: 2,
+      name: "Create new",
+      path: "/dashboard/create-new",
+      icon: FileVideo,
+    },
+    { id: 3, name: "Upgrade", path: "/dashboard/upgrade", icon: ShieldPlus },
+    { id: 4, name: "Account", path: "/dashboard/account", icon: CircleUser },
   ];
 
   return (
@@ -21,7 +26,7 @@ function SideNav() {
         {MenuOptions.map((item, index) => (
           <Link href={item.path} key={index}>
             <div
-              className={`flex items-center gap-3 p-3 rounded-md cursor-pointer hover:bg-primary hover:text-white ${
+              className={`flex items-center gap-4 mb-2 p-3 rounded-md cursor-pointer hover:bg-primary hover:text-white ${
                 path === item.path ? "bg-primary text-white" : ""
               }`}
             >
