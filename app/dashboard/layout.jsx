@@ -1,4 +1,3 @@
-// ✅ Correct for /app/dashboard/layout.jsx
 import React from "react";
 import Footer from "./_components/Footer";
 import Header from "./_components/Header";
@@ -12,7 +11,7 @@ export default function DashboardLayout({ children }) {
       </div>
       <div>
         <Header />
-        <div className="md:ml-64">{children}</div>
+        <div className="md:ml-64 p-10">{children}</div>
         <Footer />
       </div>
     </>
