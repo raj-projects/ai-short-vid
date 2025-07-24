@@ -9,10 +9,10 @@ import {
 
 const SelectDuration = ({onUserSelect}) => {
   const options = [
-    { value: "15-sec", label: "15 Seconds" },
-    { value: "30-sec", label: "30 Seconds" },
-    { value: "45-sec", label: "45 Seconds" },
-    { value: "60-sec", label: "60 Seconds" },
+    { value: "15Sec", label: "15 Seconds" },
+    { value: "30Sec", label: "30 Seconds" },
+    { value: "45Sec", label: "45 Seconds" },
+    { value: "60Sec", label: "60 Seconds" },
   ];
   const [selectedOption, setSelectedOption] = React.useState("");
 

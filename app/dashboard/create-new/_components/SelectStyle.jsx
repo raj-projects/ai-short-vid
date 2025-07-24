@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const SelectStyle = ({ onUserSelect }) => {
   const styleOptions = [
-    { name: "Cartoon", image: "../../../../assets/img/placeholder.svg" },
+    { name: "Cartoon", image: "/assets/img/placeholder.png" },
     { name: "Comic", image: "/comic.png" },
     { name: "WaterColor", image: "/watercolor.png" },
     { name: "GTA", image: "/gta.png" },
@@ -25,7 +25,7 @@ const SelectStyle = ({ onUserSelect }) => {
         {styleOptions.map((item, index) => (
           <div
             key={index}
-            className={`relative hover:scale-105 transition-all cursor-pointer rounderd-xl ${
+            className={`relative hover:scale-105 transition-all cursor-pointer rounded-xl ${
               selectedOption == item.name && "border-4 border-primary"
             }`}
           >
@@ -40,7 +40,7 @@ const SelectStyle = ({ onUserSelect }) => {
                 onUserSelect("ImageStyle", item.name);
               }}
             />
-            <h2 className="absolute p-1 bg-black bottom-0 w-full text-white text-center">
+            <h2 className="absolute p-1 bg-black bottom-0 w-full text-white text-center rounded-b-lg">
               {item.name}
             </h2>
           </div>
