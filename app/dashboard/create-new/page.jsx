@@ -1,11 +1,20 @@
 "use client";
 import React from "react";
-import SelectTopics from "../_components/_components/SelectTopics";
+import SelectTopics from "./_components/SelectTopics";
+import SelectStyle from "./_components/SelectStyle";
+import SelectDuration from "./_components/SelectDuration";
+import { Button } from "@/components/ui/button";
 
 const CreateNew = () => {
   const [formData, setFormData] = React.useState([]);
   const onHandleInputChange = (fieldName, fileldValue) => {
     console.log(fieldName, fileldValue);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [fieldName]: fileldValue,
+    }));
+    console.log("Form Data Updated:", formData);
   };
 
   return (
@@ -19,10 +28,15 @@ const CreateNew = () => {
         <SelectTopics onUserSelect={onHandleInputChange} />
 
         {/* Select Style */}
+        <SelectStyle onUserSelect={onHandleInputChange} />
 
         {/* Select Duration */}
+        <SelectDuration onUserSelect={onHandleInputChange} />
 
-        {/* Generate */}
+        {/* Generate video */}
+        <Button className="mt-10 w-full cursor-pointer">
+          Create Short Video
+        </Button>
       </div>
     </div>
   );

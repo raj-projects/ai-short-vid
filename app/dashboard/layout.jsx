@@ -10,8 +10,8 @@ export default function DashboardLayout({ children }) {
         <SideNav />
       </div>
       <div>
-        <Header />
-        <div className="md:ml-64 p-10">{children}</div>
+        <Header className="fixed" />
+        <div className="md:ml-64 p-10 h-screen">{children}</div>
         <Footer />
       </div>
     </>
