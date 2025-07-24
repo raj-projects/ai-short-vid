@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function Header() {
   return (
@@ -11,7 +12,9 @@ function Header() {
         <h1 className="font-bold">Creatify</h1>
       </div>
       <div className="flex gap-3 items-center">
-        <Button>Dashboard</Button>
+        <Link href={"/dashboard"}>
+          <Button className={"cursor-pointer"}>Dashboard</Button>
+        </Link>
         <UserButton />
       </div>
     </div>
