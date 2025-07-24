@@ -19,26 +19,19 @@ const CreateNew = () => {
   };
 
   const getVideoScript = async () => {
-    const prompt =
-      "Create a short video on the topic: " +
-      formData.topic +
-      " in the style of " +
-      formData.ImageStyle +
-      " with a duration of " +
-      formData.duration +
-      " seconds.";
+    const prompt ='Write a script to generate '+formData.duration+' seconds video on topic: '+formData.topic+' along with Al image prompt in '+formData.ImageStyle+' format for each scene and give me result in JSON format with imagePrompt and ContentText as field';
+    
+    console.log("Prompt for AI:", prompt);
+    
+    // const result = await axios
+    //   .post("/api/get-video-script", { prompt:prompt })
+    //   .then((response) => console.log(response.data));
 
-    console.log("Generated Prompt:", prompt);
-
-    const result = await axios
-      .post("/api/get-video-script", { prompt })
-      .then((response) => console.log(response.data));
-
-    if (result.data.error) {
-      console.error("Error generating video script:", result.data.error);
-      return;
-    }
-    console.log("Video Script Result:", result.data.result);
+    // if (result.data.error) {
+    //   console.error("Error generating video script:", result.data.error);
+    //   return;
+    // }
+    // console.log("Video Script Result:", result.data.result);
   };
 
   const onCreateHandler = () => {
