@@ -4,6 +4,7 @@ import SelectTopics from "./_components/SelectTopics";
 import SelectStyle from "./_components/SelectStyle";
 import SelectDuration from "./_components/SelectDuration";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 
 const CreateNew = () => {
   const [formData, setFormData] = React.useState([]);
@@ -15,6 +16,33 @@ const CreateNew = () => {
       [fieldName]: fileldValue,
     }));
     console.log("Form Data Updated:", formData);
+  };
+
+  const getVideoScript = async () => {
+    const prompt =
+      "Create a short video on the topic: " +
+      formData.topic +
+      " in the style of " +
+      formData.ImageStyle +
+      " with a duration of " +
+      formData.duration +
+      " seconds.";
+
+    console.log("Generated Prompt:", prompt);
+
+    const result = await axios
+      .post("/api/get-video-script", { prompt })
+      .then((response) => console.log(response.data));
+
+    if (result.data.error) {
+      console.error("Error generating video script:", result.data.error);
+      return;
+    }
+    console.log("Video Script Result:", result.data.result);
+  };
+
+  const onCreateHandler = () => {
+    getVideoScript();
   };
 
   return (
@@ -34,7 +62,10 @@ const CreateNew = () => {
         <SelectDuration onUserSelect={onHandleInputChange} />
 
         {/* Generate video */}
-        <Button className="mt-10 w-full cursor-pointer">
+        <Button
+          onClick={onCreateHandler}
+          className="mt-10 w-full cursor-pointer"
+        >
           Create Short Video
         </Button>
       </div>
