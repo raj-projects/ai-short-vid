@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const SelectStyle = ({ onUserSelect }) => {
   const styleOptions = [
@@ -99,7 +100,15 @@ const SelectStyle = ({ onUserSelect }) => {
             className="cursor-pointer"
             onClick={() => setShowAll(!showAll)}
           >
-            {showAll ? "Load Less" : "Load More"}
+            {showAll ? (
+              <>
+                View Less <ChevronUp className="w-4 h-4" />
+              </>
+            ) : (
+              <>
+                View More <ChevronDown className="w-4 h-4" />
+              </>
+            )}
           </Button>
         </div>
       )}

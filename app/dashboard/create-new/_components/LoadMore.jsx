@@ -30,12 +30,12 @@ export default function LoadMore({ items, initialCount = 4 }) {
           >
             {showAll ? (
               <>
-                Load Less
+                View Less
                 <ChevronUp className="w-4 h-4" />
               </>
             ) : (
               <>
-                Load More
+                View More
                 <ChevronDown className="w-4 h-4" />
               </>
             )}
