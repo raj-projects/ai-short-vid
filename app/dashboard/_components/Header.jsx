@@ -8,7 +8,7 @@ function Header() {
   return (
     <div className="p-3 px-5 flex justify-between items-center shadow-md">
       <div className="flex gap-3 items-center">
-        <Image src={"/logo.png"} alt="Logo" width={30} height={30} />
+        <Image src={"/assets/img/globe.svg"} alt="Logo" width={20} height={20} />
         <h1 className="font-bold">Creatify</h1>
       </div>
       <div className="flex gap-3 items-center">
