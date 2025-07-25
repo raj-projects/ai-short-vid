@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={outfit.className}>
+        <body className={`${outfit.className} overflow-hidden`}>
           <Provider>{children}</Provider>
         </body>
       </html>

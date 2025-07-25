@@ -25,7 +25,7 @@ export async function runAiModal(prompt) {
     },
   ];
 
-  const result = await ai.models.generateContent({
+  const result = await ai.models.generateContentStream({
     model,
     config,
     contents,

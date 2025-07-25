@@ -4,15 +4,15 @@ import Image from "next/image";
 const SelectStyle = ({ onUserSelect }) => {
   const styleOptions = [
     { name: "Cartoon", image: "/assets/img/placeholder.png" },
-    { name: "Comic", image: "/comic.png" },
-    { name: "WaterColor", image: "/watercolor.png" },
-    { name: "GTA", image: "/gta.png" },
-    { name: "Anime", image: "/anime.png" },
-    // { name: "Realistic", image: "/realistic.png" },
-    // { name: "PixelArt", image: "/pixelart.png" },
-    // { name: "Sketch", image: "/sketch.png" },
-    // { name: "3D", image: "/3d.png" },
-    // { name: "Retro", image: "/retro.png" },
+    { name: "Comic", image: "/assets/img/placeholder.png" },
+    { name: "WaterColor", image: "/assets/img/placeholder.png" },
+    { name: "GTA", image: "/assets/img/placeholder.png" },
+    { name: "Anime", image: "/assets/img/placeholder.png" },
+    { name: "Realistic", image: "/assets/img/placeholder.png" },
+    // { name: "Sketch", image: "/assets/img/placeholder.png" },
+    // { name: "3D", image: "/assets/img/placeholder.png" },
+    // { name: "Retro", image: "/assets/img/placeholder.png" },
+    // { name: "PixelArt", image: "/assets/img/placeholder.png" },
   ];
   const [selectedOption, setSelectedOption] = React.useState("");
 

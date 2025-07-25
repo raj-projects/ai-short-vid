@@ -21,7 +21,7 @@ function SideNav() {
   ];
 
   return (
-    <div className="w-64 h-screen shadow-sm p-5">
+    <div className="w-64 h-screen shadow-md p-5">
       <div>
         {MenuOptions.map((item, index) => (
           <Link href={item.path} key={index}>
