@@ -28,8 +28,12 @@ export async function runAiModal(prompt) {
 
   let responseText = "";
   for await (const chunk of result) {
-    if (chunk.text) responseText += chunk.text;
+    if (chunk.text) {
+      responseText += chunk.text;
+    }
   }
 
-  return responseText;
+  return {
+    response: new Response(responseText),
+  };
 }

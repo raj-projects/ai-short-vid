@@ -16,7 +16,7 @@ const CreateNew = () => {
       [fieldName]: fileldValue,
     }));
     console.log("Form Data Updated:", formData);
-  }; 
+  };
 
   const getVideoScript = async () => {
     const prompt =
@@ -28,11 +28,11 @@ const CreateNew = () => {
       formData.ImageStyle +
       " format for each scene and give me result in JSON format with imagePrompt and ContentText as field";
 
-    console.log("Prompt:", prompt);
+    console.log(prompt);
 
     const result = await axios
       .post("/api/get-video-script", {
-        prompt: prompt,
+        prompt,
       })
       .then((response) => {
         console.log(response.data);
