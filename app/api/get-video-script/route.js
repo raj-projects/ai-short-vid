@@ -9,7 +9,6 @@ export async function POST(request) {
     const aiText = await runAiModal(prompt);
     console.log("🤖 AI Response Text:", aiText);
 
-    // Try parsing the result as JSON (user expects structured format)
     try {
       const parsed = JSON.parse(aiText);
       return NextResponse.json({ result: parsed });

@@ -1,6 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
 
-// ❗ DO NOT use NEXT_PUBLIC_ prefix for secrets on server side
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });

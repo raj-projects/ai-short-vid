@@ -7,13 +7,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const SelectDuration = ({onUserSelect}) => {
+const SelectDuration = ({ onUserSelect }) => {
   const options = [
-    { value: "15Sec", label: "15 Seconds" },
-    { value: "30Sec", label: "30 Seconds" },
-    { value: "45Sec", label: "45 Seconds" },
-    { value: "60Sec", label: "60 Seconds" },
+    { value: "15 Seconds", label: "15 Seconds" },
+    { value: "30 Seconds", label: "30 Seconds" },
+    { value: "45 Seconds", label: "45 Seconds" },
+    { value: "60 Seconds", label: "60 Seconds" },
   ];
+
   const [selectedOption, setSelectedOption] = React.useState("");
 
   return (
@@ -22,8 +23,10 @@ const SelectDuration = ({onUserSelect}) => {
       <p className="text-gray-500">Select video duration</p>
 
       <Select
+        value={selectedOption}
         onValueChange={(value) => {
-          value !== "custom-prompt" && onUserSelect("duration", value);
+          setSelectedOption(value);
+          onUserSelect("duration", value);
         }}
       >
         <SelectTrigger className="w-full mt-2 p-6 text-lg">
@@ -31,7 +34,7 @@ const SelectDuration = ({onUserSelect}) => {
         </SelectTrigger>
         <SelectContent>
           {options.map((option) => (
-            <SelectItem key={option.label} value={option.label}>
+            <SelectItem key={option.value} value={option.value}>
               {option.label}
             </SelectItem>
           ))}
