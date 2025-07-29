@@ -11,17 +11,12 @@ export async function runAiModal(prompt) {
   const config = {
     thinkingConfig: { thinkingBudget: -1 },
     tools,
-    responseMimeType: "application/json",
   };
 
   const contents = [
     {
       role: "user",
-      parts: [
-        {
-          text: prompt,
-        },
-      ],
+      parts: [{ text: prompt }],
     },
   ];
 
@@ -31,6 +26,10 @@ export async function runAiModal(prompt) {
     contents,
   });
 
-  const responseText = result.response.text();
+  let responseText = "";
+  for await (const chunk of result) {
+    if (chunk.text) responseText += chunk.text;
+  }
+
   return responseText;
 }
