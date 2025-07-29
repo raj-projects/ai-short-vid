@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+
+import React, { useState } from "react";
 import SelectTopics from "./_components/SelectTopics";
 import SelectStyle from "./_components/SelectStyle";
 import SelectDuration from "./_components/SelectDuration";
@@ -7,39 +8,26 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 
 const CreateNew = () => {
-  const [formData, setFormData] = React.useState({});
-  const onHandleInputChange = (fieldName, fileldValue) => {
-    console.log(fieldName, fileldValue);
+  const [formData, setFormData] = useState({});
+  const [response, setResponse] = useState(null);
 
+  const onHandleInputChange = (fieldName, fieldValue) => {
     setFormData((prevData) => ({
       ...prevData,
-      [fieldName]: fileldValue,
+      [fieldName]: fieldValue,
     }));
-    console.log("Form Data Updated:", formData);
   };
 
   const getVideoScript = async () => {
-    const prompt =
-      "Write a script to generate " +
-      formData.duration +
-      " seconds video on topic: " +
-      formData.topic +
-      " along with Al image prompt in " +
-      formData.ImageStyle +
-      " format for each scene and give me result in JSON format with imagePrompt and ContentText as field";
+    const prompt = `Write a script to generate ${formData.duration} seconds video on topic: ${formData.topic} along with AI image prompts in ${formData.ImageStyle} format for each scene. Return result in JSON format with "imagePrompt" and "Content Text" fields.`;
 
-    console.log(prompt);
-
-    const result = await axios
-      .post("/api/get-video-script", {
-        prompt,
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching video script:", error);
-      });
+    try {
+      const res = await axios.post("/api/get-video-script", { prompt });
+      console.log("✅ Gemini Response:", res.data);
+      setResponse(res.data.result);
+    } catch (err) {
+      console.error("❌ Failed to get video script:", err);
+    }
   };
 
   const onCreateHandler = () => {
@@ -53,22 +41,24 @@ const CreateNew = () => {
       </h2>
 
       <div className="mt-10 shadow-md p-10">
-        {/* Select Topic */}
         <SelectTopics onUserSelect={onHandleInputChange} />
-
-        {/* Select Style */}
         <SelectStyle onUserSelect={onHandleInputChange} />
-
-        {/* Select Duration */}
         <SelectDuration onUserSelect={onHandleInputChange} />
 
-        {/* Generate video */}
         <Button
           onClick={onCreateHandler}
           className="mt-10 w-full cursor-pointer"
         >
           Create Short Video
         </Button>
+
+        {response && (
+          <pre className="mt-8 bg-gray-100 p-4 rounded-md overflow-auto text-sm">
+            {typeof response === "string"
+              ? response
+              : JSON.stringify(response, null, 2)}
+          </pre>
+        )}
       </div>
     </div>
   );

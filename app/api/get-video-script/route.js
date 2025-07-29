@@ -4,33 +4,23 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   try {
     const { prompt } = await request.json();
-    console.log("📥 Received Prompt:", prompt);
+    console.log("📥 Prompt received:", prompt);
 
-    const result = await runAiModal(prompt);
-    const text = await result.response.text();
+    const aiText = await runAiModal(prompt);
+    console.log("🤖 AI Response Text:", aiText);
 
-    console.log("🤖 Raw AI Response Text:", text);
-
-    // Safe JSON parse with fallback
-    let parsed;
+    // Try parsing the result as JSON (user expects structured format)
     try {
-      parsed = JSON.parse(text);
-    } catch (parseErr) {
-      console.error("❌ JSON Parse Error:", parseErr);
-      return NextResponse.json(
-        { error: "AI returned invalid JSON", raw: text },
-        { status: 500 }
-      );
+      const parsed = JSON.parse(aiText);
+      return NextResponse.json({ result: parsed });
+    } catch (parseError) {
+      console.warn("⚠️ AI did not return valid JSON. Sending raw text.");
+      return NextResponse.json({ result: aiText, raw: true });
     }
-
-    return NextResponse.json({ result: parsed });
   } catch (error) {
-    console.error("❌ Server Error:", error);
+    console.error("❌ Internal Server Error:", error);
     return NextResponse.json(
-      {
-        error: "Internal Server Error",
-        details: error.message || String(error),
-      },
+      { error: "Internal Server Error", message: error.message },
       { status: 500 }
     );
   }

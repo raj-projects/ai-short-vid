@@ -1,39 +1,41 @@
 import { GoogleGenAI } from "@google/genai";
 
-const model = "gemini-2.5-pro";
+// ❗ DO NOT use NEXT_PUBLIC_ prefix for secrets on server side
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+});
 
-export async function runAiModal(prompt) {
-  const ai = new GoogleGenAI({
-    apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY,
-  });
+const model = "gemini-2.0-flash";
 
-  const tools = [{ googleSearch: {} }];
-  const config = {
-    thinkingConfig: { thinkingBudget: -1 },
-    tools,
-  };
-
+export async function runAiModal(userPrompt) {
   const contents = [
     {
       role: "user",
-      parts: [{ text: prompt }],
+      parts: [
+        {
+          text: userPrompt,
+        },
+      ],
     },
   ];
 
-  const result = await ai.models.generateContentStream({
-    model,
-    config,
-    contents,
-  });
+  try {
+    const stream = await ai.models.generateContentStream({
+      model,
+      contents,
+      config: {
+        tools: [{ googleSearch: {} }],
+      },
+    });
 
-  let responseText = "";
-  for await (const chunk of result) {
-    if (chunk.text) {
-      responseText += chunk.text;
+    let output = "";
+    for await (const chunk of stream) {
+      if (chunk.text) output += chunk.text;
     }
-  }
 
-  return {
-    response: new Response(responseText),
-  };
+    return output;
+  } catch (error) {
+    console.error("Gemini API Error:", error);
+    throw error;
+  }
 }
