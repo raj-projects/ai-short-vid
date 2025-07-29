@@ -16,7 +16,7 @@ const CreateNew = () => {
       [fieldName]: fileldValue,
     }));
     console.log("Form Data Updated:", formData);
-  };
+  }; 
 
   const getVideoScript = async () => {
     const prompt =
