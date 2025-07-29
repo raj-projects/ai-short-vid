@@ -31,7 +31,7 @@ const SelectDuration = ({onUserSelect}) => {
         </SelectTrigger>
         <SelectContent>
           {options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
+            <SelectItem key={option.label} value={option.label}>
               {option.label}
             </SelectItem>
           ))}
